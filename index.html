@@ -30,28 +30,31 @@
 
         <div id="welcome-screen" class="screen active">
             <div class="welcome-content">
-                <div class="icon">🔍</div>
-                <h2>เริ่มการตรวจเต้านม</h2>
-                <p>ใช้เวลาเพียง 5-10 นาที</p>
-                <div class="info-box">
+                <div class="icon animated-icon">🔍</div>
+                <h2 class="fade-in-text">เริ่มการตรวจเต้านม</h2>
+                <p class="fade-in-text">ใช้เวลาเพียง 5-10 นาที</p>
+                
+                <div class="info-box slide-in-left">
                     <h4>📋 ขั้นตอนการตรวจ 4 ขั้นตอน</h4>
                     <ul>
-                        <li>1. ตรวจดูหน้ากระจก</li>
-                        <li>2. ตรวจดูท่ายกแขน</li>
-                        <li>3. ตรวจคลำท่านอน</li>
-                        <li>4. ตรวจหัวนม</li>
+                        <li class="step-item">1. ตรวจดูหน้ากระจก</li>
+                        <li class="step-item">2. ตรวจดูท่ายกแขน</li>
+                        <li class="step-item">3. ตรวจคลำท่านอน</li>
+                        <li class="step-item">4. ตรวจหัวนม</li>
                     </ul>
                 </div>
-                <div class="choice-guide">
+                
+                <div class="choice-guide slide-in-right">
                     <h4>🎯 วิธีการตอบ</h4>
                     <div class="guide-item">
-                        <span class="yes-demo">ใช่</span> = ลักษณะปกติ (ไม่มีปัญหา)
+                        <span class="yes-demo pulse">ใช่</span> = ลักษณะปกติ (ไม่มีปัญหา)
                     </div>
                     <div class="guide-item">
-                        <span class="no-demo">ไม่ใช่</span> = พบความผิดปกติ (ต้องระวัง)
+                        <span class="no-demo pulse">ไม่ใช่</span> = พบความผิดปกติ (ต้องระวัง)
                     </div>
                 </div>
-                <div class="choice-guide">
+                
+                <div class="choice-guide slide-in-up">
                     <h4>🔊 คุณสมบัติเสียงแนะนำ</h4>
                     <div class="guide-item">
                         <span style="color: #667eea;">🎙️</span> มีเสียงแนะนำในแต่ละขั้นตอน
@@ -60,14 +63,18 @@
                         <span style="color: #667eea;">🔊</span> สามารถเปิด/ปิดเสียงได้
                     </div>
                 </div>
-                <button class="btn-primary" onclick="startExam()">เริ่มตรวจ</button>
+                
+                <button class="btn-primary animated-button" onclick="startExam()">
+                    <span class="btn-text">เริ่มตรวจ</span>
+                    <div class="btn-ripple"></div>
+                </button>
             </div>
         </div>
 
         <div id="exam-screen" class="screen">
             <div class="progress-container">
                 <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
+                    <div class="progress animated-progress" id="progress"></div>
                 </div>
                 <div class="step-counter">
                     <span id="current-step">1</span>/<span id="total-steps">4</span>
@@ -76,8 +83,17 @@
             
             <div class="step-content">
                 <div class="step-header">
-                    <div class="step-icon" id="step-icon">👀</div>
-                    <h3 id="step-title">ขั้นตอนที่ 1: ตรวจดู</h3>
+                    <div class="step-icon bounce-in" id="step-icon">👀</div>
+                    <h3 id="step-title" class="clickable-title">ขั้นตอนที่ 1: ตรวจดู</h3>
+                    <button class="play-audio-btn" onclick="playStepAudio()">
+                        <span class="audio-icon">🔊</span>
+                        <span class="audio-text">ฟังคำแนะนำ</span>
+                        <div class="audio-waves">
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                        </div>
+                    </button>
                 </div>
                 
                 <div class="instruction-box">
@@ -97,8 +113,12 @@
                 </div>
                 
                 <div class="step-buttons">
-                    <button class="btn-secondary" onclick="prevStep()" id="prev-btn" disabled>ก่อนหน้า</button>
-                    <button class="btn-primary" onclick="nextStep()" id="next-btn">ถัดไป</button>
+                    <button class="btn-secondary animated-button" onclick="prevStep()" id="prev-btn" disabled>
+                        <span class="btn-text">ก่อนหน้า</span>
+                    </button>
+                    <button class="btn-primary animated-button" onclick="nextStep()" id="next-btn">
+                        <span class="btn-text">ถัดไป</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -108,8 +128,12 @@
                 <!-- ผลลัพธ์จะแสดงที่นี่ -->
             </div>
             <div class="action-buttons">
-                <button class="btn-primary" onclick="restartExam()">ตรวจใหม่</button>
-                <button class="btn-secondary" onclick="showTips()">เคล็ดลับการตรวจ</button>
+                <button class="btn-primary animated-button" onclick="restartExam()">
+                    <span class="btn-text">ตรวจใหม่</span>
+                </button>
+                <button class="btn-secondary animated-button" onclick="showTips()">
+                    <span class="btn-text">เคล็ดลับการตรวจ</span>
+                </button>
             </div>
         </div>
 
@@ -128,11 +152,12 @@
                     <h4>📅 ความถี่</h4>
                     <p>ตรวจทุกเดือนในวันเดียวกัน สร้างเป็นนิสัย</p>
                 </div>
-                <button class="btn-primary" onclick="backToResult()">กลับ</button>
+                <button class="btn-primary animated-button" onclick="backToResult()">
+                    <span class="btn-text">กลับ</span>
+                </button>
             </div>
         </div>
 
-        <!-- Footer สำหรับข้อมูลผู้พัฒนา -->
         <footer class="developer-info">
             <div class="developer-content">
                 <div class="research-badge">
@@ -148,6 +173,14 @@
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- Voice Controls -->
+    <div class="voice-controls">
+        <button class="voice-btn" onclick="toggleVoice()" title="เปิด/ปิดเสียง">
+            <span class="voice-icon">🔊</span>
+            <div class="voice-ripple"></div>
+        </button>
     </div>
 
     <script src="script.js"></script>
