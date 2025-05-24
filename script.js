@@ -128,14 +128,13 @@ function checkSpeechSupport() {
 }
 
 // ฟังก์ชันเสียงที่ปรับปรุงแล้ว
-function speakText(text, callback = null) {
+function speakTextWithMotionSync(text, callback = null) {
     if (!isVoiceEnabled || !speechSupported) {
         console.log('Voice disabled or not supported');
         if (callback) callback();
         return;
     }
     
-    // หยุดเสียงเฉพาะเมื่อจำเป็น
     if (speechSynthesis.speaking) {
         speechSynthesis.cancel();
     }
@@ -160,12 +159,14 @@ function speakText(text, callback = null) {
             isAudioPlaying = true;
             updateAudioButton();
             updateVoiceButton();
+            startMotionSync();
         };
         
         utterance.onend = () => {
             isAudioPlaying = false;
             updateAudioButton();
             updateVoiceButton();
+            stopMotionSync();
             if (callback) callback();
         };
         
@@ -174,6 +175,7 @@ function speakText(text, callback = null) {
             isAudioPlaying = false;
             updateAudioButton();
             updateVoiceButton();
+            stopMotionSync();
             if (callback) callback();
         };
         
@@ -190,8 +192,9 @@ function playStepAudio() {
             speechSynthesis.cancel();
             isAudioPlaying = false;
             updateAudioButton();
+            stopMotionSync();
         } else {
-            speakText(step.voiceText);
+            speakTextWithMotionSync(step.voiceText);
         }
     }
 }
@@ -230,6 +233,59 @@ function updateVoiceButton() {
     }
 }
 
+// Motion Sync Functions
+function startMotionSync() {
+    const motionContainer = document.querySelector('.motion-graphics-container .motion-demo');
+    const instructionText = document.querySelector('.instruction-text');
+    const voiceOverlay = document.querySelector('.voice-wave-overlay');
+    const audioIndicator = document.querySelector('.audio-progress-indicator');
+    
+    if (motionContainer) {
+        motionContainer.classList.add('audio-synced');
+        
+        if (voiceOverlay) {
+            voiceOverlay.classList.add('active');
+        }
+        
+        if (audioIndicator) {
+            audioIndicator.classList.add('active');
+        }
+        
+        const audioSyncDemo = new AudioSyncMotionDemo();
+        audioSyncDemo.startAudioSyncAnimation(motionContainer, currentStep);
+    }
+    
+    if (instructionText) {
+        instructionText.classList.add('voice-speaking');
+    }
+}
+
+function stopMotionSync() {
+    const motionContainer = document.querySelector('.motion-graphics-container .motion-demo');
+    const instructionText = document.querySelector('.instruction-text');
+    const voiceOverlay = document.querySelector('.voice-wave-overlay');
+    const audioIndicator = document.querySelector('.audio-progress-indicator');
+    
+    if (motionContainer) {
+        motionContainer.classList.remove('audio-synced');
+        
+        if (voiceOverlay) {
+            voiceOverlay.classList.remove('active');
+        }
+        
+        if (audioIndicator) {
+            audioIndicator.classList.remove('active');
+        }
+        
+        const audioSyncDemo = new AudioSyncMotionDemo();
+        audioSyncDemo.stopAudioSyncAnimation(motionContainer);
+    }
+    
+    if (instructionText) {
+        instructionText.classList.remove('voice-speaking');
+    }
+}
+
 // สร้าง ripple effect
 function createRipple(event, element) {
     const ripple = document.createElement('div');
@@ -265,7 +321,7 @@ function addButtonEffects() {
     isInitialized = true;
 }
 
-// Animation functions (ลด setTimeout)
+// Animation functions
 function createFloatingAnimation() {
     const container = document.querySelector('.container');
     if (!container) return;
@@ -286,7 +342,6 @@ function createFloatingAnimation() {
     }
 }
 
-// ใช้ requestAnimationFrame แทน setTimeout
 function animateElements(elements, className, delay = 0) {
     elements.forEach((element, index) => {
         element.classList.remove(className);
@@ -356,14 +411,13 @@ async function showStep(stepIndex) {
     const step = examSteps[stepIndex];
     const progress = ((stepIndex + 1) / examSteps.length) * 100;
     
-    // หยุดเสียงเฉพาะเมื่อจำเป็น
     if (speechSynthesis.speaking) {
         speechSynthesis.cancel();
         isAudioPlaying = false;
         updateAudioButton();
+        stopMotionSync();
     }
     
-    // อัพเดท UI
     animateProgressBar();
     document.getElementById('progress').style.width = progress + '%';
     document.getElementById('current-step').textContent = stepIndex + 1;
@@ -372,14 +426,12 @@ async function showStep(stepIndex) {
     document.getElementById('instruction-title').textContent = step.instructionTitle;
     document.getElementById('step-description').textContent = step.description;
     
-    // Animation แบบ sequential
     animateStepHeader();
     await new Promise(resolve => setTimeout(resolve, 100));
     
     animateInstructionBox();
     await new Promise(resolve => setTimeout(resolve, 200));
     
-    // สร้าง Motion Graphics Demo
     const exampleBox = document.getElementById('example-box');
     exampleBox.innerHTML = '<h4>💡 ตัวอย่างการตรวจ</h4>';
     
@@ -387,11 +439,10 @@ async function showStep(stepIndex) {
     motionContainer.className = 'motion-graphics-container';
     exampleBox.appendChild(motionContainer);
     
-    const motionDemo = new MotionGraphicsDemo();
-    motionDemo.createMotionDemo(stepIndex, motionContainer);
-    motionDemo.startAnimation(motionContainer);
+    const audioSyncDemo = new AudioSyncMotionDemo();
+    audioSyncDemo.createMotionDemo(stepIndex, motionContainer);
+    audioSyncDemo.startAnimation(motionContainer);
     
-    // เพิ่มตัวอย่าง
     step.examples.forEach(example => {
         const exampleItem = document.createElement('div');
         exampleItem.className = 'example-item';
@@ -405,7 +456,6 @@ async function showStep(stepIndex) {
     await new Promise(resolve => setTimeout(resolve, 300));
     animateExamples();
     
-    // สร้าง checklist
     const checklist = document.getElementById('checklist');
     checklist.innerHTML = '';
     
@@ -449,14 +499,11 @@ async function showStep(stepIndex) {
     setupChoiceButtons();
 }
 
-// ใช้ event delegation แทนการเพิ่ม onclick
 function setupChoiceButtons() {
     const checklist = document.getElementById('checklist');
     if (!checklist) return;
     
-    // ลบ event listener เก่า
     checklist.removeEventListener('click', handleChoiceClick);
-    // เพิ่ม event listener ใหม่
     checklist.addEventListener('click', handleChoiceClick);
 }
 
@@ -471,7 +518,6 @@ function handleChoiceClick(event) {
     selectChoice(stepIndex, checkIndex, choice);
 }
 
-// สร้างปุ่มเสียงครั้งเดียว
 function initializeVoiceControls() {
     let voiceControls = document.querySelector('.voice-controls');
     
@@ -485,7 +531,6 @@ function initializeVoiceControls() {
         `;
         document.body.appendChild(voiceControls);
         
-        // เพิ่ม event listener ครั้งเดียว
         voiceControls.querySelector('.voice-btn').addEventListener('click', toggleVoice);
     }
     
@@ -520,12 +565,13 @@ function toggleVoice() {
         speechSynthesis.cancel();
         isAudioPlaying = false;
         updateAudioButton();
+        stopMotionSync();
     }
     
     updateVoiceButtonState();
     
     if (isVoiceEnabled) {
-        speakText("เปิดเสียงแล้ว");
+        speakTextWithMotionSync("เปิดเสียงแล้ว");
     }
 }
 
@@ -539,12 +585,10 @@ function selectChoice(stepIndex, checkIndex, choice) {
     const yesBtn = checkItem.querySelector('.choice-btn.yes');
     const noBtn = checkItem.querySelector('.choice-btn.no');
     
-    // รีเซ็ตสถานะ
     checkItem.classList.remove('answered-yes', 'answered-no');
     yesBtn.classList.remove('selected');
     noBtn.classList.remove('selected');
     
-    // ตั้งสถานะใหม่
     if (choice === 'yes') {
         yesBtn.classList.add('selected');
         checkItem.classList.add('answered-yes');
@@ -553,7 +597,6 @@ function selectChoice(stepIndex, checkIndex, choice) {
         checkItem.classList.add('answered-no');
     }
     
-    // Animation feedback
     checkItem.style.transform = 'scale(1.02)';
     requestAnimationFrame(() => {
         setTimeout(() => {
@@ -590,6 +633,7 @@ function showResult() {
     if (speechSynthesis.speaking) {
         speechSynthesis.cancel();
         isAudioPlaying = false;
+        stopMotionSync();
     }
     
     document.getElementById('exam-screen').classList.remove('active');
@@ -633,7 +677,7 @@ function showResult() {
         `;
         
         setTimeout(() => {
-            speakText("คุณมีความเสี่ยงสูง ควรติดต่อแพทย์ทันที");
+            speakTextWithMotionSync("คุณมีความเสี่ยงสูง ควรติดต่อแพทย์ทันที");
         }, 500);
         
     } else if (totalRiskCount > 0) {
@@ -649,7 +693,7 @@ function showResult() {
         `;
         
         setTimeout(() => {
-            speakText("ควรติดตามอาการ พบความผิดปกติเล็กน้อย แนะนำให้สังเกตอาการต่อไป");
+            speakTextWithMotionSync("ควรติดตามอาการ พบความผิดปกติเล็กน้อย แนะนำให้สังเกตอาการต่อไป");
         }, 500);
         
     } else {
@@ -666,11 +710,10 @@ function showResult() {
         `;
         
         setTimeout(() => {
-            speakText("ผลการตรวจปกติ ไม่พบอาการที่น่าเป็นห่วง แต่ควรตรวจเป็นประจำทุกเดือน");
+            speakTextWithMotionSync("ผลการตรวจปกติ ไม่พบอาการที่น่าเป็นห่วง แต่ควรตรวจเป็นประจำทุกเดือน");
         }, 500);
     }
     
-    // Animation สำหรับผลลัพธ์
     const resultBox = document.querySelector('.result-box');
     if (resultBox) {
         resultBox.style.opacity = '0';
@@ -689,12 +732,12 @@ function restartExam() {
     if (speechSynthesis.speaking) {
         speechSynthesis.cancel();
         isAudioPlaying = false;
+        stopMotionSync();
     }
     
     currentStep = 0;
     answers = {};
     
-    // ลบปุ่มเสียง
     const voiceControls = document.querySelector('.voice-controls');
     if (voiceControls) {
         voiceControls.remove();
@@ -714,11 +757,12 @@ function backToResult() {
     document.getElementById('result-screen').classList.add('active');
 }
 
-// Motion Graphics Demo Class
-class MotionGraphicsDemo {
+// Audio-Synchronized Motion Graphics Class
+class AudioSyncMotionDemo {
     constructor() {
         this.currentDemo = null;
         this.isPlaying = false;
+        this.isAudioSynced = false;
     }
 
     createMotionDemo(stepIndex, container) {
@@ -824,6 +868,83 @@ class MotionGraphicsDemo {
     stopAnimation(container) {
         this.isPlaying = false;
         container.classList.remove('playing');
+    }
+
+    startAudioSyncAnimation(container, stepIndex) {
+        this.isAudioSynced = true;
+        container.classList.add('audio-synced');
+        
+        this.addVoiceWaveOverlay(container);
+        this.startSyncedAnimations(container, stepIndex);
+        this.addAudioProgressIndicator(container);
+    }
+
+    addVoiceWaveOverlay(container) {
+        const overlay = document.createElement('div');
+        overlay.className = 'voice-wave-overlay';
+        
+        for (let i = 0; i < 3; i++) {
+            const wave = document.createElement('div');
+            wave.className = 'voice-wave';
+            wave.style.animationDelay = (i * 0.5) + 's';
+            overlay.appendChild(wave);
+        }
+        
+        container.appendChild(overlay);
+    }
+
+    addAudioProgressIndicator(container) {
+        const indicator = document.createElement('div');
+        indicator.className = 'audio-progress-indicator';
+        indicator.textContent = '🎙️ กำลังแนะนำ...';
+        container.appendChild(indicator);
+    }
+
+    startSyncedAnimations(container, stepIndex) {
+        const elements = container.querySelectorAll('.body-silhouette, .breast-area, .arm, .palpation-hand, .palpation-points, .nipple-area, .examination-fingers, .mirror-frame');
+        
+        elements.forEach(element => {
+            if (element.classList.contains('body-silhouette')) {
+                element.classList.add('audio-active');
+            }
+            if (element.classList.contains('breast-area')) {
+                element.classList.add('voice-highlight');
+            }
+            if (element.classList.contains('arm')) {
+                element.classList.add('voice-controlled');
+            }
+            if (element.classList.contains('palpation-hand')) {
+                element.classList.add('voice-guided');
+            }
+            if (element.classList.contains('palpation-points')) {
+                element.classList.add('voice-active');
+            }
+            if (element.classList.contains('nipple-area')) {
+                element.classList.add('voice-examining');
+            }
+            if (element.classList.contains('examination-fingers')) {
+                element.classList.add('voice-pressing');
+            }
+            if (element.classList.contains('mirror-frame')) {
+                element.classList.add('voice-active');
+            }
+        });
+    }
+
+    stopAudioSyncAnimation(container) {
+        this.isAudioSynced = false;
+        container.classList.remove('audio-synced');
+        
+        const overlay = container.querySelector('.voice-wave-overlay');
+        const indicator = container.querySelector('.audio-progress-indicator');
+        
+        if (overlay) overlay.remove();
+        if (indicator) indicator.remove();
+        
+        const elements = container.querySelectorAll('.audio-active, .voice-highlight, .voice-controlled, .voice-guided, .voice-active, .voice-examining, .voice-pressing');
+        elements.forEach(element => {
+            element.classList.remove('audio-active', 'voice-highlight', 'voice-controlled', 'voice-guided', 'voice-active', 'voice-examining', 'voice-pressing');
+        });
     }
 }
 
