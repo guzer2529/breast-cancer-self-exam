@@ -4,16 +4,19 @@ const examSteps = [
         icon: "👀",
         instructionTitle: "วิธีการตรวจ",
         description: "ยืนหน้ากระจก แขนห้อยธรรมชาติ สังเกตรูปร่างและผิวหนังเต้านม",
+        voiceText: "ขั้นตอนที่หนึ่ง ตรวจดูหน้ากระจก ให้ยืนหน้ากระจก แขนห้อยธรรมชาติ สังเกตรูปร่างและผิวหนังเต้านม",
         examples: [
             {
                 title: "✅ ลักษณะปกติ",
                 desc: "เต้านมทั้งสองข้างมีขนาดใกล้เคียงกัน ผิวหนังเรียบ หัวนมอยู่ในตำแหน่งเดิม",
-                type: "normal"
+                type: "normal",
+                voiceText: "ลักษณะปกติ คือ เต้านมทั้งสองข้างมีขนาดใกล้เคียงกัน ผิวหนังเรียบ หัวนมอยู่ในตำแหน่งเดิม"
             },
             {
                 title: "⚠️ อาการเตือนภัย",
                 desc: "เต้านมข้างหนึ่งใหญ่กว่าปกติอย่างชัดเจน ผิวหนังเป็นคลื่นเหมือนเปลือกส้ม หัวนมบุ๋มเข้าไป",
-                type: "danger"
+                type: "danger",
+                voiceText: "อาการเตือนภัย คือ เต้านมข้างหนึ่งใหญ่กว่าปกติอย่างชัดเจน ผิวหนังเป็นคลื่นเหมือนเปลือกส้ม หัวนมบุ๋มเข้าไป"
             }
         ],
         checks: [
@@ -28,16 +31,19 @@ const examSteps = [
         icon: "🙋‍♀️",
         instructionTitle: "วิธีการตรวจ",
         description: "ยกแขนทั้งสองข้างขึ้นเหนือศีรษะ สังเกตการเปลี่ยนแปลงของเต้านม",
+        voiceText: "ขั้นตอนที่สอง ตรวจดูท่ายกแขน ให้ยกแขนทั้งสองข้างขึ้นเหนือศีรษะ สังเกตการเปลี่ยนแปลงของเต้านม",
         examples: [
             {
                 title: "✅ การเคลื่อนไหวปกติ",
                 desc: "เต้านมเคลื่อนไหวขึ้นลงเป็นธรรมชาติ ไม่มีการดึงผิวหนังผิดปกติ",
-                type: "normal"
+                type: "normal",
+                voiceText: "การเคลื่อนไหวปกติ คือ เต้านมเคลื่อนไหวขึ้นลงเป็นธรรมชาติ ไม่มีการดึงผิวหนังผิดปกติ"
             },
             {
                 title: "⚠️ อาการผิดปกติ",
                 desc: "เต้านมข้างหนึ่งไม่เคลื่อนไหวตามแขน มีการดึงผิวหนังเข้าหาข้างใน",
-                type: "danger"
+                type: "danger",
+                voiceText: "อาการผิดปกติ คือ เต้านมข้างหนึ่งไม่เคลื่อนไหวตามแขน มีการดึงผิวหนังเข้าหาข้างใน"
             }
         ],
         checks: [
@@ -51,21 +57,25 @@ const examSteps = [
         icon: "🤲",
         instructionTitle: "เทคนิคการคลำ",
         description: "นอนราบ ยกแขนข้างที่ตรวจไว้ใต้ศีรษะ ใช้ปลายนิ้ว 3 นิ้วคลำเป็นวงกลม",
+        voiceText: "ขั้นตอนที่สาม ตรวจคลำท่านอน ให้นอนราบ ยกแขนข้างที่ตรวจไว้ใต้ศีรษะ ใช้ปลายนิ้วสามนิ้วคลำเป็นวงกลม",
         examples: [
             {
                 title: "🔄 วิธีการคลำ",
                 desc: "เริ่มจากด้านนอกเต้านม คลำเป็นวงกลมเล็กๆ เข้าหาหัวนม กดเบา-ปานกลาง-แรง",
-                type: "normal"
+                type: "normal",
+                voiceText: "วิธีการคลำ เริ่มจากด้านนอกเต้านม คลำเป็นวงกลมเล็กๆ เข้าหาหัวนม กดเบา ปานกลาง และแรง"
             },
             {
                 title: "🎯 พื้นที่ที่ต้องตรวจ",
                 desc: "เต้านมทั้งหมด บริเวณรักแร้ ใต้กระดูกไหปลาร้า และเหนือกระดูกไหปลาร้า",
-                type: "normal"
+                type: "normal",
+                voiceText: "พื้นที่ที่ต้องตรวจ ได้แก่ เต้านมทั้งหมด บริเวณรักแร้ ใต้กระดูกไหปลาร้า และเหนือกระดูกไหปลาร้า"
             },
             {
                 title: "⚠️ สิ่งที่ต้องระวัง",
                 desc: "พบก้อนแข็งหรือก้อนเนื้อผิดปกติ ความหนาผิดปกติของเนื้อเยื่อ",
-                type: "danger"
+                type: "danger",
+                voiceText: "สิ่งที่ต้องระวัง คือ พบก้อนแข็งหรือก้อนเนื้อผิดปกติ ความหนาผิดปกติของเนื้อเยื่อ"
             }
         ],
         checks: [
@@ -80,16 +90,19 @@ const examSteps = [
         icon: "🔍",
         instructionTitle: "วิธีการตรวจ",
         description: "ใช้นิ้วหัวแม่มือและนิ้วชี้ บีบหัวนมเบาๆ จากโคนไปปลาย",
+        voiceText: "ขั้นตอนที่สี่ ตรวจหัวนม ให้ใช้นิ้วหัวแม่มือและนิ้วชี้ บีบหัวนมเบาๆ จากโคนไปปลาย",
         examples: [
             {
                 title: "✅ ลักษณะปกติ",
                 desc: "ไม่มีของเหลวออกจากหัวนม หัวนมไม่เจ็บ ไม่แสบ ผิวหนังรอบหัวนมปกติ",
-                type: "normal"
+                type: "normal",
+                voiceText: "ลักษณะปกติ คือ ไม่มีของเหลวออกจากหัวนม หัวนมไม่เจ็บ ไม่แสบ ผิวหนังรอบหัวนมปกติ"
             },
             {
                 title: "⚠️ อาการเตือนภัย",
                 desc: "มีของเหลวใส เหลือง หรือเลือดออกจากหัวนม หัวนมเจ็บ แสบ หรือคัน",
-                type: "danger"
+                type: "danger",
+                voiceText: "อาการเตือนภัย คือ มีของเหลวใส เหลือง หรือเลือดออกจากหัวนม หัวนมเจ็บ แสบ หรือคัน"
             }
         ],
         checks: [
@@ -101,13 +114,91 @@ const examSteps = [
 ];
 
 let currentStep = 0;
-let answers = {}; // เก็บคำตอบของแต่ละข้อ
+let answers = {};
+let isVoiceEnabled = true;
+let currentSpeech = null;
+
+// เสียงแนะนำ
+function speakText(text, callback = null) {
+    if (!isVoiceEnabled || !('speechSynthesis' in window)) return;
+    
+    // หยุดเสียงที่กำลังเล่นอยู่
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'th-TH';
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+    utterance.volume = 0.8;
+    
+    utterance.onstart = () => {
+        const voiceBtn = document.querySelector('.voice-btn');
+        if (voiceBtn) voiceBtn.classList.add('speaking');
+    };
+    
+    utterance.onend = () => {
+        const voiceBtn = document.querySelector('.voice-btn');
+        if (voiceBtn) voiceBtn.classList.remove('speaking');
+        if (callback) callback();
+    };
+    
+    currentSpeech = utterance;
+    window.speechSynthesis.speak(utterance);
+}
+
+// Animation สำหรับตัวอย่าง
+function animateExamples() {
+    const exampleItems = document.querySelectorAll('.example-item');
+    exampleItems.forEach((item, index) => {
+        item.classList.remove('animate');
+        setTimeout(() => {
+            item.classList.add('animate');
+        }, index * 300);
+    });
+}
+
+// Animation สำหรับ check items
+function animateCheckItems() {
+    const checkItems = document.querySelectorAll('.check-item');
+    checkItems.forEach((item, index) => {
+        item.classList.remove('animate');
+        setTimeout(() => {
+            item.classList.add('animate');
+        }, (index * 200) + 800);
+    });
+}
+
+// Animation สำหรับ instruction box
+function animateInstructionBox() {
+    const instructionBox = document.querySelector('.instruction-box');
+    if (instructionBox) {
+        instructionBox.classList.remove('animate');
+        setTimeout(() => {
+            instructionBox.classList.add('animate');
+        }, 200);
+    }
+}
+
+// Animation สำหรับ step header
+function animateStepHeader() {
+    const stepHeader = document.querySelector('.step-header');
+    if (stepHeader) {
+        stepHeader.classList.remove('animate');
+        setTimeout(() => {
+            stepHeader.classList.add('animate');
+        }, 100);
+    }
+}
 
 function startExam() {
     document.getElementById('welcome-screen').classList.remove('active');
     document.getElementById('exam-screen').classList.add('active');
     document.getElementById('total-steps').textContent = examSteps.length;
-    answers = {}; // รีเซ็ตคำตอบ
+    answers = {};
+    
+    // เพิ่มปุ่มควบคุมเสียง
+    addVoiceControls();
+    
     showStep(0);
 }
 
@@ -122,6 +213,12 @@ function showStep(stepIndex) {
     document.getElementById('instruction-title').textContent = step.instructionTitle;
     document.getElementById('step-description').textContent = step.description;
     
+    // Animation สำหรับ header
+    animateStepHeader();
+    
+    // Animation สำหรับ instruction box
+    animateInstructionBox();
+    
     // แสดงตัวอย่าง
     const exampleBox = document.getElementById('example-box');
     exampleBox.innerHTML = '<h4>💡 ตัวอย่างการตรวจ</h4>';
@@ -135,6 +232,11 @@ function showStep(stepIndex) {
         `;
         exampleBox.appendChild(exampleItem);
     });
+    
+    // Animation สำหรับตัวอย่าง
+    setTimeout(() => {
+        animateExamples();
+    }, 400);
     
     // สร้าง checklist
     const checklist = document.getElementById('checklist');
@@ -164,7 +266,6 @@ function showStep(stepIndex) {
             </div>
         `;
         
-        // ใส่สีตามคำตอบที่เลือก
         if (currentAnswer === 'yes') {
             checkItem.classList.add('answered-yes');
         } else if (currentAnswer === 'no') {
@@ -174,7 +275,65 @@ function showStep(stepIndex) {
         checklist.appendChild(checkItem);
     });
     
+    // Animation สำหรับ check items
+    setTimeout(() => {
+        animateCheckItems();
+    }, 600);
+    
     updateButtons();
+    
+    // เล่นเสียงแนะนำ
+    setTimeout(() => {
+        playStepVoiceGuide(step);
+    }, 1000);
+}
+
+function playStepVoiceGuide(step) {
+    if (!isVoiceEnabled) return;
+    
+    let voiceText = step.voiceText + ". ";
+    
+    // เพิ่มตัวอย่าง
+    step.examples.forEach((example, index) => {
+        voiceText += example.voiceText + ". ";
+    });
+    
+    voiceText += "กรุณาตอบคำถามในแต่ละข้อ";
+    
+    speakText(voiceText);
+}
+
+function addVoiceControls() {
+    // ลบปุ่มเก่าถ้ามี
+    const existingControls = document.querySelector('.voice-controls');
+    if (existingControls) {
+        existingControls.remove();
+    }
+    
+    const voiceControls = document.createElement('div');
+    voiceControls.className = 'voice-controls';
+    voiceControls.innerHTML = `
+        <button class="voice-btn" onclick="toggleVoice()" title="${isVoiceEnabled ? 'ปิดเสียง' : 'เปิดเสียง'}">
+            ${isVoiceEnabled ? '🔊' : '🔇'}
+        </button>
+    `;
+    
+    document.body.appendChild(voiceControls);
+}
+
+function toggleVoice() {
+    isVoiceEnabled = !isVoiceEnabled;
+    
+    if (!isVoiceEnabled) {
+        window.speechSynthesis.cancel();
+    }
+    
+    const voiceBtn = document.querySelector('.voice-btn');
+    if (voiceBtn) {
+        voiceBtn.innerHTML = isVoiceEnabled ? '🔊' : '🔇';
+        voiceBtn.title = isVoiceEnabled ? 'ปิดเสียง' : 'เปิดเสียง';
+        voiceBtn.classList.remove('speaking');
+    }
 }
 
 function selectChoice(stepIndex, checkIndex, choice) {
@@ -185,23 +344,24 @@ function selectChoice(stepIndex, checkIndex, choice) {
     const yesBtn = checkItem.querySelector('.choice-btn.yes');
     const noBtn = checkItem.querySelector('.choice-btn.no');
     
-    // รีเซ็ตสีของ item
     checkItem.classList.remove('answered-yes', 'answered-no');
-    
-    // รีเซ็ตปุ่ม
     yesBtn.classList.remove('selected');
     noBtn.classList.remove('selected');
     
     if (choice === 'yes') {
         yesBtn.classList.add('selected');
         checkItem.classList.add('answered-yes');
+        speakText("เลือกใช่");
     } else {
         noBtn.classList.add('selected');
         checkItem.classList.add('answered-no');
+        speakText("เลือกไม่ใช่");
     }
 }
 
 function nextStep() {
+    window.speechSynthesis.cancel();
+    
     if (currentStep < examSteps.length - 1) {
         currentStep++;
         showStep(currentStep);
@@ -211,6 +371,8 @@ function nextStep() {
 }
 
 function prevStep() {
+    window.speechSynthesis.cancel();
+    
     if (currentStep > 0) {
         currentStep--;
         showStep(currentStep);
@@ -226,16 +388,16 @@ function updateButtons() {
 }
 
 function showResult() {
+    window.speechSynthesis.cancel();
+    
     document.getElementById('exam-screen').classList.remove('active');
     document.getElementById('result-screen').classList.add('active');
     
     const resultContent = document.getElementById('result-content');
     
-    // นับจำนวนคำตอบ "ไม่ใช่" และแยกตามระดับความเสี่ยง
     let highRiskCount = 0;
     let mediumRiskCount = 0;
     let lowRiskCount = 0;
-    let totalAnswered = 0;
     
     Object.keys(answers).forEach(answerKey => {
         if (answers[answerKey] === 'no') {
@@ -246,13 +408,11 @@ function showResult() {
             else if (riskLevel === 'medium') mediumRiskCount++;
             else lowRiskCount++;
         }
-        totalAnswered++;
     });
     
     const totalRiskCount = highRiskCount + mediumRiskCount + lowRiskCount;
     
     if (highRiskCount > 0 || totalRiskCount >= 4) {
-        // มีความเสี่ยงสูง
         resultContent.innerHTML = `
             <div class="result-box risk">
                 <h3>🚨 คุณมีความเสี่ยงสูง</h3>
@@ -270,26 +430,28 @@ function showResult() {
                 </div>
             </div>
         `;
+        
+        setTimeout(() => {
+            speakText("คุณมีความเสี่ยงสูง ควรติดต่อแพทย์ทันที");
+        }, 500);
+        
     } else if (totalRiskCount > 0) {
-        // มีความเสี่ยงปานกลาง
         resultContent.innerHTML = `
             <div class="result-box warning">
                 <h3>⚠️ ควรติดตามอาการ</h3>
                 <p>พบความผิดปกติเล็กน้อย ${totalRiskCount} รายการ</p>
-                <p><strong>พบความผิดปกติ:</strong></p>
-                <p>• ความเสี่ยงปานกลาง: ${mediumRiskCount} รายการ</p>
-                <p>• ความเสี่ยงต่ำ: ${lowRiskCount} รายการ</p>
                 <p><strong>แนะนำ:</strong></p>
                 <p>• สังเกตอาการต่อไปอีก 1-2 สัปดาห์</p>
                 <p>• หากอาการไม่ดีขึ้น ควรพบแพทย์</p>
                 <p>• ตรวจเต้านมด้วยตัวเองเป็นประจำ</p>
-                <div class="contact-info">
-                    <p><strong>📞 ปรึกษาแพทย์: 045-317133</strong></p>
-                </div>
             </div>
         `;
+        
+        setTimeout(() => {
+            speakText("ควรติดตามอาการ พบความผิดปกติเล็กน้อย แนะนำให้สังเกตอาการต่อไป");
+        }, 500);
+        
     } else {
-        // ปกติ
         resultContent.innerHTML = `
             <div class="result-box safe">
                 <h3>✅ ผลการตรวจปกติ</h3>
@@ -299,25 +461,26 @@ function showResult() {
                 <p>• ตรวจกับแพทย์ทุก 1-3 ปี (อายุ 20-39 ปี)</p>
                 <p>• ตรวจกับแพทย์ทุกปี (อายุ 40+ ปี)</p>
                 <p>• Mammogram เมื่ออายุ 40 ปีขึ้นไป</p>
-                <p><strong>🎯 วันตรวจครั้งถัดไป: ${getNextExamDate()}</strong></p>
             </div>
         `;
+        
+        setTimeout(() => {
+            speakText("ผลการตรวจปกติ ไม่พบอาการที่น่าเป็นห่วง แต่ควรตรวจเป็นประจำทุกเดือน");
+        }, 500);
     }
 }
 
-function getNextExamDate() {
-    const today = new Date();
-    const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-    return nextMonth.toLocaleDateString('th-TH', { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-    });
-}
-
 function restartExam() {
+    window.speechSynthesis.cancel();
     currentStep = 0;
     answers = {};
+    
+    // ลบปุ่มควบคุมเสียง
+    const voiceControls = document.querySelector('.voice-controls');
+    if (voiceControls) {
+        voiceControls.remove();
+    }
+    
     document.getElementById('result-screen').classList.remove('active');
     document.getElementById('welcome-screen').classList.add('active');
 }
