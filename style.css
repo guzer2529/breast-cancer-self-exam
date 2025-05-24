@@ -28,7 +28,7 @@ body {
     box-shadow: 0 0 50px rgba(0,0,0,0.1);
 }
 
-/* Enhanced Header Styles */
+/* Header Styles */
 .hospital-logo {
     background: rgba(255,255,255,0.15);
     padding: 1rem;
@@ -124,7 +124,7 @@ header::before {
     font-size: 0.75rem;
 }
 
-/* Smooth Screen Transitions */
+/* Screen Transitions */
 .screen {
     flex: 1;
     display: none;
@@ -142,7 +142,7 @@ header::before {
     animation: screenFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Enhanced Welcome Screen Animations */
+/* Welcome Screen */
 .welcome-content {
     text-align: center;
     margin-top: 2rem;
@@ -214,7 +214,7 @@ header::before {
     animation: pulse 2s ease-in-out infinite;
 }
 
-/* Info Box Styles */
+/* Info Box */
 .info-box {
     background: #f8f9fa;
     padding: 1.5rem;
@@ -244,7 +244,7 @@ header::before {
     border-bottom: none;
 }
 
-/* Choice Guide Styles */
+/* Choice Guide */
 .choice-guide {
     background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
     padding: 1.5rem;
@@ -305,7 +305,7 @@ header::before {
     text-align: center;
 }
 
-/* Enhanced Button Styles */
+/* Button Styles */
 .animated-button {
     position: relative;
     overflow: hidden;
@@ -370,7 +370,7 @@ header::before {
     pointer-events: none;
 }
 
-/* Audio Button Styles */
+/* Audio Button */
 .play-audio-btn {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
@@ -422,7 +422,7 @@ header::before {
 .wave:nth-child(2) { animation-delay: 0.1s; }
 .wave:nth-child(3) { animation-delay: 0.2s; }
 
-/* Enhanced Progress Bar */
+/* Progress Bar */
 .progress-container {
     display: flex;
     align-items: center;
@@ -444,15 +444,7 @@ header::before {
     position: relative;
 }
 
-.progress {
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
-    height: 100%;
-    width: 0%;
-    border-radius: 5px;
-    position: relative;
-    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+.progress,
 .animated-progress {
     background: linear-gradient(135deg, #ff6b9d, #c44569);
     height: 100%;
@@ -483,7 +475,7 @@ header::before {
     border-radius: 20px;
 }
 
-/* Enhanced Step Header */
+/* Step Header */
 .step-header {
     text-align: center;
     margin-bottom: 1.5rem;
@@ -536,7 +528,7 @@ header::before {
     opacity: 1;
 }
 
-/* Instruction Box Styles */
+/* Instruction Box */
 .instruction-box {
     background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
     padding: 1.5rem;
@@ -566,7 +558,7 @@ header::before {
     font-size: 0.9rem;
 }
 
-/* Example Box Styles */
+/* Example Box */
 .example-box {
     background: linear-gradient(135deg, #fff3e0 0%, #fef7e0 100%);
     padding: 1.5rem;
@@ -626,7 +618,7 @@ header::before {
     color: #c62828;
 }
 
-/* Enhanced Motion Graphics */
+/* Motion Graphics */
 .motion-demo {
     position: relative;
     width: 100%;
@@ -647,7 +639,6 @@ header::before {
     height: 100%;
 }
 
-/* Realistic Body Silhouette */
 .body-silhouette {
     position: absolute;
     top: 50%;
@@ -682,7 +673,6 @@ header::before {
     animation-delay: 1s;
 }
 
-/* Realistic Mirror Frame */
 .mirror-frame {
     width: 160px;
     height: 220px;
@@ -706,7 +696,6 @@ header::before {
     animation: mirrorReflection 2s ease-in-out infinite;
 }
 
-/* Enhanced Palpation Demo */
 .palpation-demo {
     position: relative;
     display: flex;
@@ -763,7 +752,6 @@ header::before {
 .point-3 { bottom: 20px; right: 56px; animation-delay: 1s; }
 .point-4 { bottom: 40px; left: 20px; animation-delay: 1.5s; }
 
-/* Enhanced Figure Animation */
 .arm-raise-demo {
     position: relative;
     display: flex;
@@ -822,7 +810,6 @@ header::before {
     animation: armRaiseRight 3s ease-in-out infinite;
 }
 
-/* Enhanced Nipple Examination */
 .nipple-exam-demo {
     position: relative;
     display: flex;
@@ -901,7 +888,109 @@ header::before {
     animation: normalPulse 2s ease-in-out infinite;
 }
 
-/* Checklist Styles */
+/* Audio Sync Animations */
+.motion-demo.audio-synced {
+    transition: all 0.3s ease;
+}
+
+.voice-guided-animation {
+    animation-play-state: paused;
+}
+
+.voice-guided-animation.speaking {
+    animation-play-state: running;
+}
+
+.body-silhouette.audio-active {
+    animation: bodyBreatheSynced 4s ease-in-out infinite;
+}
+
+.breast-area.voice-highlight {
+    animation: voiceHighlight 3s ease-in-out infinite;
+}
+
+.arm.voice-controlled {
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+}
+
+.arm-left.voice-controlled {
+    animation: armRaiseLeftSynced 4s ease-in-out infinite;
+}
+
+.arm-right.voice-controlled {
+    animation: armRaiseRightSynced 4s ease-in-out infinite;
+}
+
+.palpation-hand.voice-guided {
+    animation: circularMotionSynced 6s linear infinite;
+}
+
+.palpation-points.voice-active {
+    animation: pointPulseSynced 2s ease-in-out infinite;
+}
+
+.nipple-area.voice-examining {
+    animation: nippleExamSynced 3s ease-in-out infinite;
+}
+
+.examination-fingers.voice-pressing {
+    animation: fingerPressSynced 2.5s ease-in-out infinite;
+}
+
+.voice-wave-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.voice-wave-overlay.active {
+    opacity: 1;
+}
+
+.voice-wave {
+    position: absolute;
+    border: 2px solid rgba(255, 107, 157, 0.6);
+    border-radius: 50%;
+    animation: voiceWaveExpand 2s ease-out infinite;
+}
+
+.audio-progress-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 107, 157, 0.9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.audio-progress-indicator.active {
+    opacity: 1;
+    animation: progressPulse 1s ease-in-out infinite;
+}
+
+.instruction-text.voice-speaking {
+    animation: textHighlight 0.5s ease-in-out;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(196, 69, 105, 0.2));
+    border: 2px solid rgba(255, 107, 157, 0.5);
+}
+
+.mirror-frame.voice-active::before {
+    animation: mirrorReflectionSynced 3s ease-in-out infinite;
+}
+
+/* Checklist */
 .checklist-container h4 {
     color: #2c3e50;
     margin-bottom: 1.5rem;
@@ -977,7 +1066,6 @@ header::before {
     z-index: 2;
 }
 
-/* Choice Button Styles */
 .choice-buttons {
     display: flex;
     gap: 1rem;
@@ -1201,7 +1289,7 @@ header::before {
     margin-top: 1.5rem;
 }
 
-/* Tips Styles */
+/* Tips */
 .tips-content {
     text-align: center;
 }
@@ -1240,7 +1328,7 @@ header::before {
     font-size: 0.9rem;
 }
 
-/* Footer Styles */
+/* Footer */
 .developer-info {
     background: linear-gradient(135deg, #2c3e50, #34495e);
     color: white;
@@ -1309,7 +1397,7 @@ header::before {
     color: #bdc3c7;
 }
 
-/* Enhanced Voice Controls */
+/* Voice Controls */
 .voice-controls {
     position: fixed;
     bottom: 20px;
@@ -1356,7 +1444,6 @@ header::before {
     pointer-events: none;
 }
 
-/* Floating Elements */
 .floating-bubble {
     position: absolute;
     width: 25px;
@@ -1368,7 +1455,7 @@ header::before {
     box-shadow: 0 2px 10px rgba(255, 107, 157, 0.2);
 }
 
-/* Enhanced Animations */
+/* Animations */
 @keyframes logoSlideIn {
     from {
         opacity: 0;
@@ -1506,284 +1593,6 @@ header::before {
     50% { transform: translate(-50%, -50%) scale(1.03); }
 }
 
-@keyframes breastHighlight {
-    0%, 100% { 
-        background: radial-gradient(circle, #ff8a95, #ff6b9d);
-        transform: scale(1);
-        box-shadow: 0 2px 8px rgba(255, 107, 157, 0.3);
-    }
-    50% { 
-        background: radial-gradient(circle, #ff6b9d, #c44569);
-        transform: scale(1.1);
-        box-shadow: 0 4px 15px rgba(255, 107, 157, 0.6);
-    }
-}
-
-@keyframes mirrorGlow {
-    0%, 100% { 
-        box-shadow: 0 10px 30px rgba(25, 118, 210, 0.2);
-    }
-    50% { 
-        box-shadow: 0 15px 40px rgba(25, 118, 210, 0.4);
-    }
-}
-
-@keyframes mirrorReflection {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 0.5; }
-}
-
-@keyframes circularMotion {
-    0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
-}
-
-@keyframes pressurePoint {
-    0%, 100% { 
-        background: #ff6b9d;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% { 
-        background: #c44569;
-        transform: translate(-50%, -50%) scale(1.3);
-    }
-}
-
-@keyframes pointPulse {
-    0%, 100% { 
-        transform: scale(1);
-        opacity: 0.6;
-    }
-    50% { 
-        transform: scale(1.5);
-        opacity: 1;
-        box-shadow: 0 0 10px rgba(255, 107, 157, 0.8);
-    }
-}
-
-@keyframes armRaiseLeft {
-    0%, 100% { transform: rotate(25deg); }
-    50% { transform: rotate(-50deg); }
-}
-
-@keyframes armRaiseRight {
-    0%, 100% { transform: rotate(-25deg); }
-    50% { transform: rotate(50deg); }
-}
-
-@keyframes nippleExamFocus {
-    0%, 100% { 
-        transform: scale(1);
-        box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
-    }
-    50% { 
-        transform: scale(1.08);
-        box-shadow: 0 8px 30px rgba(255, 107, 157, 0.5);
-    }
-}
-
-@keyframes nipplePulse {
-    0%, 100% { 
-        background: radial-gradient(circle, #c44569, #8e2a3d);
-    }
-    50% { 
-        background: radial-gradient(circle, #ff6b9d, #c44569);
-    }
-}
-
-@keyframes fingerPress {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(10px); }
-}
-
-@keyframes textFade {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-}
-
-@keyframes normalPulse {
-    0%, 100% { 
-        opacity: 0.6;
-        transform: scale(1);
-    }
-    50% { 
-        opacity: 1;
-        transform: scale(1.1);
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
-    }
-}
-
-@keyframes selectedPulse {
-    0%, 100% { 
-        transform: translateY(-3px) scale(1.02);
-    }
-    50% { 
-        transform: translateY(-3px) scale(1.04);
-    }
-}
-
-@keyframes selectedPulseRed {
-    0%, 100% { 
-        transform: translateY(-3px) scale(1.02);
-    }
-    50% { 
-        transform: translateY(-3px) scale(1.04);
-    }
-}
-
-@keyframes voicePulse {
-    0%, 100% { 
-        transform: scale(1);
-        box-shadow: 0 6px 25px rgba(102, 126, 234, 0.3);
-    }
-    50% { 
-        transform: scale(1.05);
-        box-shadow: 0 10px 35px rgba(102, 126, 234, 0.6);
-    }
-}
-
-@keyframes floatUp {
-    0% {
-        bottom: -50px;
-        opacity: 0;
-        transform: translateX(0) rotate(0deg) scale(0.5);
-    }
-    10% {
-        opacity: 1;
-        transform: translateX(0) rotate(0deg) scale(1);
-    }
-    90% {
-        opacity: 1;
-        transform: translateX(100px) rotate(180deg) scale(1);
-    }
-    100% {
-        bottom: 100vh;
-        opacity: 0;
-        transform: translateX(200px) rotate(360deg) scale(0.5);
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-    .container {
-        max-width: 100%;
-    }
-    
-    .logo-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.8rem;
-    }
-    
-    .logo-text h2 {
-        font-size: 1rem;
-    }
-    
-    .logo-text p {
-        font-size: 0.75rem;
-    }
-    
-    .research-badge {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.8rem;
-        padding: 1rem;
-    }
-    
-    .badge-text {
-        text-align: center;
-    }
-    
-    .developer-content {
-        gap: 0.8rem;
-    }
-    
-    header {
-        padding: 1rem;
-    }
-    
-    .screen {
-        padding: 1rem;
-    }
-    
-    .check-item {
-        padding: 1.5rem 1rem;
-    }
-    
-    .choice-buttons {
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-    
-    .choice-btn {
-        width: 100%;
-        padding: 1rem;
-    }
-    
-    .step-buttons {
-        flex-direction: column;
-    }
-    
-    .step-buttons .btn-primary,
-    .step-buttons .btn-secondary {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .motion-demo {
-        height: 280px;
-    }
-    
-    .mirror-frame {
-        width: 130px;
-        height: 180px;
-    }
-    
-    .breast-outline {
-        width: 110px;
-        height: 110px;
-    }
-    
-    .figure {
-        width: 80px;
-        height: 120px;
-    }
-    
-    .voice-btn {
-        width: 55px;
-        height: 55px;
-        font-size: 1.3rem;
-    }
-    
-    .play-audio-btn {
-        font-size: 0.8rem;
-        padding: 0.6rem 1rem;
-    }
-}
-
-/* Performance Optimizations */
-.container * {
-    will-change: transform, opacity;
-}
-
-.animated-button,
-.voice-btn,
-.progress,
-.animated-progress {
-    will-change: transform;
-}
-
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
+@keyframes bodyBreatheSynced {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    25% { transform: translate(-50%, -50%) scale(1.02); }
