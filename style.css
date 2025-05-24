@@ -24,24 +24,36 @@ header {
     background: linear-gradient(135deg, #ff6b9d, #c44569);
     color: white;
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 1.5rem;
 }
 
 header h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
 header p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.timing-info {
+    background: rgba(255,255,255,0.2);
+    padding: 0.5rem;
+    border-radius: 15px;
+    margin-top: 0.5rem;
+}
+
+.timing-info small {
+    font-size: 0.75rem;
 }
 
 .screen {
     display: none;
-    padding: 2rem 1.5rem;
-    min-height: calc(100vh - 120px);
+    padding: 1.5rem;
+    min-height: calc(100vh - 140px);
 }
 
 .screen.active {
@@ -50,23 +62,239 @@ header p {
 
 .welcome-content {
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 .icon {
-    font-size: 4rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
 }
 
 .welcome-content h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 0.5rem;
     color: #2c3e50;
 }
 
 .welcome-content p {
     color: #7f8c8d;
+    margin-bottom: 1.5rem;
+}
+
+.info-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.info-box h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.info-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-box li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.9rem;
+}
+
+.info-box li:last-child {
+    border-bottom: none;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 2rem;
+}
+
+.progress-bar {
+    background: #ecf0f1;
+    height: 6px;
+    border-radius: 3px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.progress {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 3px;
+}
+
+.step-counter {
+    font-weight: 600;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.step-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-header h3 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.instruction-box {
+    background: #e3f2fd;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #2196f3;
+}
+
+.instruction-box h4 {
+    color: #1976d2;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.instruction-box p {
+    color: #424242;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.example-box {
+    background: #fff3e0;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #ff9800;
+}
+
+.example-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ffcc02;
+}
+
+.example-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.example-title {
+    font-weight: 600;
+    color: #e65100;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.example-desc {
+    color: #bf360c;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.normal-sign {
+    color: #2e7d32;
+}
+
+.warning-sign {
+    color: #f57c00;
+}
+
+.danger-sign {
+    color: #c62828;
+}
+
+.checklist-container h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.checklist {
+    margin-bottom: 2rem;
+}
+
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 1.2rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.check-item:hover {
+    background: #e9ecef;
+    transform: translateY(-1px);
+}
+
+.check-item.checked {
+    background: #d4edda;
+    border-left-color: #28a745;
+}
+
+.check-item.warning {
+    background: #fff3cd;
+    border-left-color: #ffc107;
+}
+
+.check-item.danger {
+    background: #f8d7da;
+    border-left-color: #dc3545;
+}
+
+.check-item input[type="checkbox"] {
+    margin-right: 1rem;
+    transform: scale(1.3);
+    margin-top: 0.2rem;
+}
+
+.check-item label {
+    flex: 1;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.risk-indicator {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+    font-weight: 500;
+}
+
+.risk-high {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.risk-medium {
+    background: #fff8e1;
+    color: #f57c00;
+}
+
+.risk-low {
+    background: #e8f5e8;
+    color: #2e7d32;
 }
 
 .btn-primary {
@@ -80,6 +308,7 @@ header p {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    width: 100%;
 }
 
 .btn-primary:hover {
@@ -91,11 +320,12 @@ header p {
     background: #ecf0f1;
     color: #7f8c8d;
     border: none;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 1.5rem;
     border-radius: 20px;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .btn-secondary:disabled {
@@ -103,99 +333,20 @@ header p {
     cursor: not-allowed;
 }
 
-.progress-bar {
-    background: #ecf0f1;
-    height: 6px;
-    border-radius: 3px;
-    margin-bottom: 2rem;
-    overflow: hidden;
-}
-
-.progress {
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
-    height: 100%;
-    width: 0%;
-    transition: width 0.5s ease;
-    border-radius: 3px;
-}
-
-.step-content {
-    text-align: center;
-}
-
-.step-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.step-content h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: #2c3e50;
-}
-
-.step-content p {
-    color: #7f8c8d;
-    margin-bottom: 2rem;
-    line-height: 1.6;
-}
-
-.checklist {
-    text-align: left;
-    margin-bottom: 2rem;
-}
-
-.check-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.check-item:hover {
-    background: #e9ecef;
-}
-
-.check-item.checked {
-    background: #d4edda;
-    border-left: 4px solid #28a745;
-}
-
-.check-item.warning {
-    background: #fff3cd;
-    border-left: 4px solid #ffc107;
-}
-
-.check-item.danger {
-    background: #f8d7da;
-    border-left: 4px solid #dc3545;
-}
-
-.check-item input[type="checkbox"] {
-    margin-right: 1rem;
-    transform: scale(1.2);
-}
-
-.check-item label {
-    flex: 1;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
 .step-buttons {
     display: flex;
     gap: 1rem;
-    justify-content: space-between;
     margin-top: 2rem;
+}
+
+.step-buttons .btn-primary,
+.step-buttons .btn-secondary {
+    width: 50%;
 }
 
 .result-content {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .result-box {
@@ -224,18 +375,62 @@ header p {
 .result-box p {
     line-height: 1.6;
     margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .contact-info {
     background: #fff;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 10px;
     margin-top: 1rem;
     border: 1px solid #dee2e6;
+    text-align: left;
 }
 
 .contact-info strong {
     color: #dc3545;
+}
+
+.contact-info p {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tips-content {
+    text-align: center;
+}
+
+.tips-content h2 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+}
+
+.tip-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    text-align: left;
+    border-left: 4px solid #17a2b8;
+}
+
+.tip-card h4 {
+    color: #17a2b8;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.tip-card p {
+    color: #495057;
+    line-height: 1.6;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 480px) {
@@ -248,15 +443,20 @@ header p {
     }
     
     .screen {
-        padding: 1.5rem 1rem;
+        padding: 1rem;
     }
     
     .step-buttons {
         flex-direction: column;
     }
     
-    .btn-primary, .btn-secondary {
+    .step-buttons .btn-primary,
+    .step-buttons .btn-secondary {
         width: 100%;
         margin-bottom: 0.5rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
     }
 }
