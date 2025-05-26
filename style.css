@@ -622,13 +622,13 @@ header::before {
 .motion-demo {
     position: relative;
     width: 100%;
-    height: 320px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    min-height: 220px;
+    background: #f8f9fa;
     border-radius: 20px;
     margin: 1rem 0;
     overflow: hidden;
     border: 2px solid #dee2e6;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    box-sizing: border-box;
 }
 
 .visual-exam-demo {
@@ -640,16 +640,21 @@ header::before {
 }
 
 .body-silhouette {
+    width: 60px;
+    height: 90px;
     position: absolute;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90px;
-    height: 140px;
-    background: linear-gradient(135deg, #ffb3ba, #ffdfba);
-    border-radius: 45px 45px 25px 25px;
-    animation: bodyBreathe 3s ease-in-out infinite;
-    box-shadow: inset 0 4px 8px rgba(0,0,0,0.1);
+    top: 25px;
+    transform: translateX(-50%);
+    background: #ffb3ba;
+    border-radius: 30px 30px 15px 15px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .motion-demo { min-height: 160px; }
+    .mirror-frame { width: 80px; height: 110px; }
+    .body-silhouette { width: 40px; height: 60px; }
 }
 
 .breast-area {
@@ -674,14 +679,15 @@ header::before {
 }
 
 .mirror-frame {
-    width: 160px;
-    height: 220px;
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-    border: 10px solid #1976d2;
+    width: 110px;
+    height: 150px;
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+    background: #e3f2fd;
     border-radius: 20px;
-    position: relative;
-    animation: mirrorGlow 4s ease-in-out infinite;
-    box-shadow: 0 10px 30px rgba(25, 118, 210, 0.2);
+    box-sizing: border-box;
 }
 
 .mirror-frame::before {
