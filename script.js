@@ -104,92 +104,94 @@ const examSteps = [
     }
 ];
 
-let currentStep = 0;
-let answers = {};
-let isVoiceEnabled = true;
-let currentSpeech = null;
-let speechSupported = false;
-let isAudioPlaying = false;
-let isInitialized = false;
+var currentStep = 0;
+var answers = {};
+var isVoiceEnabled = true;
+var currentSpeech = null;
+var speechSupported = false;
+var isAudioPlaying = false;
+var isInitialized = false;
 
 // ตรวจสอบการรองรับเสียง
 function checkSpeechSupport() {
-    if ('speechSynthesis' in window) {
-        speechSupported = true;
-        if (speechSynthesis.getVoices().length === 0) {
-            speechSynthesis.addEventListener('voiceschanged', () => {
-                console.log('Voices loaded:', speechSynthesis.getVoices().length);
-            });
+    try {
+        if ('speechSynthesis' in window) {
+            speechSupported = true;
+            if (window.speechSynthesis.getVoices().length === 0) {
+                window.speechSynthesis.addEventListener('voiceschanged', function() {
+                    // do nothing
+                });
+            }
+        } else {
+            speechSupported = false;
         }
-    } else {
+    } catch (e) {
         speechSupported = false;
-        console.log('Speech synthesis not supported');
     }
 }
 
 // ฟังก์ชันเสียงที่ปรับปรุงแล้ว
-function speakTextWithMotionSync(text, callback = null) {
-    if (!isVoiceEnabled || !speechSupported) {
-        console.log('Voice disabled or not supported');
+function speakTextWithMotionSync(text, callback) {
+    if (typeof callback === 'undefined') callback = null;
+    if (!isVoiceEnabled || !speechSupported || !window.speechSynthesis) {
         if (callback) callback();
         return;
     }
-    
-    if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
-    }
-    
-    setTimeout(() => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        
-        const voices = speechSynthesis.getVoices();
-        const thaiVoice = voices.find(voice => voice.lang.includes('th')) || 
-                         voices.find(voice => voice.lang.includes('TH'));
-        
-        if (thaiVoice) {
-            utterance.voice = thaiVoice;
+    try {
+        if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
         }
-        
-        utterance.lang = 'th-TH';
-        utterance.rate = 0.8;
-        utterance.pitch = 1;
-        utterance.volume = 0.9;
-        
-        utterance.onstart = () => {
-            isAudioPlaying = true;
-            updateAudioButton();
-            updateVoiceButton();
-            startMotionSync();
-        };
-        
-        utterance.onend = () => {
-            isAudioPlaying = false;
-            updateAudioButton();
-            updateVoiceButton();
-            stopMotionSync();
-            if (callback) callback();
-        };
-        
-        utterance.onerror = (event) => {
-            console.error('Speech error:', event.error);
-            isAudioPlaying = false;
-            updateAudioButton();
-            updateVoiceButton();
-            stopMotionSync();
-            if (callback) callback();
-        };
-        
-        currentSpeech = utterance;
-        speechSynthesis.speak(utterance);
-    }, 100);
+        setTimeout(function() {
+            var utterance = new window.SpeechSynthesisUtterance(text);
+            var voices = window.speechSynthesis.getVoices();
+            var thaiVoice = null;
+            for (var i = 0; i < voices.length; i++) {
+                if (voices[i].lang && (voices[i].lang.indexOf('th') !== -1 || voices[i].lang.indexOf('TH') !== -1)) {
+                    thaiVoice = voices[i];
+                    break;
+                }
+            }
+            if (thaiVoice) {
+                utterance.voice = thaiVoice;
+            }
+            utterance.lang = 'th-TH';
+            utterance.rate = 0.8;
+            utterance.pitch = 1;
+            utterance.volume = 0.9;
+            utterance.onstart = function() {
+                isAudioPlaying = true;
+                updateAudioButton();
+                updateVoiceButton();
+                startMotionSync();
+            };
+            utterance.onend = function() {
+                isAudioPlaying = false;
+                updateAudioButton();
+                updateVoiceButton();
+                stopMotionSync();
+                if (callback) callback();
+            };
+            utterance.onerror = function(event) {
+                isAudioPlaying = false;
+                updateAudioButton();
+                updateVoiceButton();
+                stopMotionSync();
+                if (callback) callback();
+            };
+            currentSpeech = utterance;
+            window.speechSynthesis.speak(utterance);
+        }, 100);
+    } catch (e) {
+        if (callback) callback();
+    }
 }
 
 // ฟังก์ชันเล่นเสียงขั้นตอน
 function playStepAudio() {
-    const step = examSteps[currentStep];
+    var step = examSteps[currentStep];
     if (step && step.voiceText) {
-        if (isAudioPlaying) {
-            speechSynthesis.cancel();
+        if (isAudioPlaying && window.speechSynthesis) {
+            window.speechSynthesis.cancel();
             isAudioPlaying = false;
             updateAudioButton();
             stopMotionSync();
@@ -390,7 +392,29 @@ function animateProgressBar() {
     }
 }
 
+// ฟังก์ชัน debugLog สำหรับแสดง log ที่ด้านล่างของหน้าจอ
+function debugLog(msg) {
+    let el = document.getElementById('debug-log');
+    if (!el) {
+        el = document.createElement('div');
+        el.id = 'debug-log';
+        el.style.position = 'fixed';
+        el.style.bottom = '0';
+        el.style.left = '0';
+        el.style.width = '100vw';
+        el.style.background = 'rgba(0,0,0,0.7)';
+        el.style.color = '#fff';
+        el.style.zIndex = '9999';
+        el.style.fontSize = '12px';
+        el.style.padding = '4px 8px';
+        el.style.pointerEvents = 'none';
+        document.body.appendChild(el);
+    }
+    el.innerText = msg;
+}
+
 function startExam() {
+    debugLog('startExam called');
     checkSpeechSupport();
     
     document.getElementById('welcome-screen').classList.remove('active');
@@ -408,11 +432,12 @@ function startExam() {
 
 // ปรับปรุง showStep ให้ใช้ async/await
 async function showStep(stepIndex) {
+    debugLog('showStep: ' + stepIndex);
     const step = examSteps[stepIndex];
     const progress = ((stepIndex + 1) / examSteps.length) * 100;
     
-    if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
+    if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
         isAudioPlaying = false;
         updateAudioButton();
         stopMotionSync();
@@ -542,7 +567,7 @@ function updateVoiceButtonState() {
     const voiceIcon = document.querySelector('.voice-icon');
     
     if (voiceBtn && voiceIcon) {
-        if (!speechSupported) {
+        if (!speechSupported || !window.speechSynthesis) {
             voiceBtn.disabled = true;
             voiceBtn.title = 'ไม่รองรับเสียง';
             voiceIcon.textContent = '🚫';
@@ -557,25 +582,22 @@ function updateVoiceButtonState() {
 }
 
 function toggleVoice() {
-    if (!speechSupported) return;
-    
+    if (!speechSupported || !window.speechSynthesis) return;
     isVoiceEnabled = !isVoiceEnabled;
-    
-    if (!isVoiceEnabled && speechSynthesis.speaking) {
-        speechSynthesis.cancel();
+    if (!isVoiceEnabled && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
         isAudioPlaying = false;
         updateAudioButton();
         stopMotionSync();
     }
-    
     updateVoiceButtonState();
-    
     if (isVoiceEnabled) {
         speakTextWithMotionSync("เปิดเสียงแล้ว");
     }
 }
 
 function selectChoice(stepIndex, checkIndex, choice) {
+    debugLog('selectChoice: step=' + stepIndex + ', check=' + checkIndex + ', choice=' + choice);
     const answerKey = `${stepIndex}-${checkIndex}`;
     answers[answerKey] = choice;
     
@@ -606,6 +628,7 @@ function selectChoice(stepIndex, checkIndex, choice) {
 }
 
 function nextStep() {
+    debugLog('nextStep called, currentStep=' + currentStep);
     if (currentStep < examSteps.length - 1) {
         currentStep++;
         showStep(currentStep);
@@ -615,6 +638,7 @@ function nextStep() {
 }
 
 function prevStep() {
+    debugLog('prevStep called, currentStep=' + currentStep);
     if (currentStep > 0) {
         currentStep--;
         showStep(currentStep);
@@ -630,8 +654,9 @@ function updateButtons() {
 }
 
 function showResult() {
-    if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
+    debugLog('showResult called');
+    if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
         isAudioPlaying = false;
         stopMotionSync();
     }
@@ -729,8 +754,8 @@ function showResult() {
 }
 
 function restartExam() {
-    if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
+    if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
         isAudioPlaying = false;
         stopMotionSync();
     }
