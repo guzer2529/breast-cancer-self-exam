@@ -629,30 +629,12 @@ function selectChoice(stepIndex, checkIndex, choice) {
     updateButtons();
 }
 
-function updateButtons() {
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    
-    if (prevBtn) prevBtn.disabled = (currentStep === 0);
-    if (nextBtn) {
-        nextBtn.textContent = (currentStep === examSteps.length - 1) ? 'ดูผลลัพธ์' : 'ถัดไป';
-        // (Disable "ถัดไป" if any checklist item in the current step is not answered (i.e. answers[stepIndex + "-" + i] is undefined).)
-        let allAnswered = true;
-        for (let i = 0; i < examSteps[currentStep].checks.length; i++) {
-            if (answers[currentStep + "-" + i] === undefined) {
-                allAnswered = false;
-                break;
-            }
-        }
-        nextBtn.disabled = !allAnswered;
-    }
-}
-
 function nextStep() {
     debugLog('nextStep called, currentStep=' + currentStep);
+    updateButtons();
     const nextBtn = document.getElementById('next-btn');
     if (nextBtn && nextBtn.disabled) {
-        alert("คุณยังไม่ได้เลือกครบทุกหัวข้อในขั้นตอนนี้ กรุณาตอบให้ครบทุกข้อก่อนกดถัดไป");
+        alert("คุณต้องเลือกทุกหัวข้อในขั้นตอนนี้ก่อนจึงจะไปขั้นตอนถัดไปได้");
         return;
     }
     if (currentStep < examSteps.length - 1) {
@@ -668,6 +650,25 @@ function prevStep() {
     if (currentStep > 0) {
         currentStep--;
         showStep(currentStep);
+    }
+}
+
+function updateButtons() {
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    if (prevBtn) prevBtn.disabled = (currentStep === 0);
+    
+    if (nextBtn) {
+        nextBtn.textContent = (currentStep === examSteps.length - 1) ? 'ดูผลลัพธ์' : 'ถัดไป';
+        let allAnswered = true;
+        for (let i = 0; i < examSteps[currentStep].checks.length; i++) {
+            if (answers[currentStep + "-" + i] === undefined) {
+                allAnswered = false;
+                break;
+            }
+        }
+        nextBtn.disabled = !allAnswered;
     }
 }
 
